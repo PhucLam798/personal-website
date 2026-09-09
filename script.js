@@ -650,11 +650,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeSun = document.getElementById('themeSun');
     const mobileThemeText = document.getElementById('mobileThemeText');
 
-    let currentTheme = localStorage.getItem('preferred-theme') || 'dark';
+    // Dọn dẹp cache cũ trong localStorage (nếu từng lưu 'dark' trước đó) để đảm bảo luôn mặc định là Sáng (trắng) khi mở trang
+    try {
+        localStorage.removeItem('preferred-theme');
+    } catch (e) {}
+
+    // Mặc định luôn là màu trắng ('light') khi mới mở trang
+    let currentTheme = 'light';
+    try {
+        const savedTheme = sessionStorage.getItem('preferred-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+            currentTheme = savedTheme;
+        }
+    } catch (e) {}
 
     function applyTheme(theme) {
         currentTheme = theme;
-        localStorage.setItem('preferred-theme', theme);
+        try {
+            sessionStorage.setItem('preferred-theme', theme);
+        } catch (e) {}
 
         if (theme === 'light') {
             document.body.classList.add('theme-light');
