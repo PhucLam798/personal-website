@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="theme-dark">
+<body class="theme-light">
 
     <canvas id="ai-network" aria-hidden="true"></canvas>
 
@@ -41,10 +41,10 @@
                 </div>
 
                 <button id="themeToggle" class="theme-toggle-btn p-1.5 rounded-sm border border-white/10 bg-white/5 hover:border-cyan-500/50 text-gray-300 hover:text-cyan-400 transition flex items-center justify-center" aria-label="Toggle Theme" title="Chế độ Sáng / Tối">
-                    <svg id="themeMoon" class="w-4 h-4 text-cyan-400 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="themeMoon" class="w-4 h-4 text-cyan-400 transition hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="themeSun" class="w-4 h-4 text-amber-400 transition hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg id="themeSun" class="w-4 h-4 text-amber-400 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -72,7 +72,7 @@
                 <a href="#awards" class="nav-link text-base text-gray-300 hover:text-cyan-400" data-i18n="nav.awards">Thành tích</a>
                 <a href="#contact" class="nav-link text-base text-gray-300 hover:text-cyan-400" data-i18n="nav.contact">Liên hệ</a>
                 <button id="mobileThemeToggle" class="mt-2 px-4 py-1.5 text-xs font-code rounded-sm border border-cyan-500/40 text-cyan-300 bg-cyan-500/10 flex items-center gap-2 hover:bg-cyan-500/20 transition">
-                    <span id="mobileThemeText">Theme: Dark 🌙</span>
+                    <span id="mobileThemeText">Theme: Light ☀️</span>
                 </button>
             </div>
         </div>
