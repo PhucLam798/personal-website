@@ -509,8 +509,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'act.seas.btnView': { en: 'View project', vi: 'Xem dự án' },
         'act.seas.spotlightTitle': { en: 'RICE LEAF DISEASE CLASSIFICATION FOR FARMERS', vi: 'PHÂN LOẠI BỆNH LÁ TRÊN CÂY LÚA DÀNH CHO NÔNG DÂN' },
         'act.seas.spotlightDesc': { 
-            en: 'Collaborated on a team project to build and train image classification models to detect rice pests and diseases, supporting farmers in Central Vietnam.', 
-            vi: 'Hợp tác trong dự án nhóm để xây dựng và huấn luyện mô hình phân loại hình ảnh nhằm phát hiện sâu bệnh hại lúa, hỗ trợ nông dân khu vực miền Trung Việt Nam.' 
+            en: '<strong>Project Lead:</strong> Collaborated on developing and training an image classification model to detect rice pests and diseases, supporting farmers in Central Vietnam.', 
+            vi: '<strong>Trưởng nhóm dự án:</strong> Hợp tác xây dựng và huấn luyện mô hình phân loại hình ảnh nhằm phát hiện sâu bệnh hại lúa, hỗ trợ nông dân khu vực miền Trung Việt Nam.'
         },
         'act.seas.b1': { 
             en: 'Completed an intensive, full-time two-week program in <strong>Artificial Intelligence and Applications</strong> (developed based on the undergraduate Computer Science curriculum of MIT).', 
