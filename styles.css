@@ -2026,6 +2026,25 @@ body.theme-light .road-intro {
     color: var(--accent-primary);
 }
 
+/* Give the opening statement room for two lines and keep its key phrase intact. */
+.ri-b0.ri-center {
+    width: min(92vw, 1120px);
+    margin-left: calc(min(92vw, 1120px) / -2);
+}
+
+.ri-b0 .ri-title--xl {
+    font-size: clamp(1.75rem, 4vw, 4rem);
+    font-weight: 500;
+    line-height: 1.24;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+
+.ri-b0 .ri-title em {
+    display: inline-block;
+    white-space: nowrap;
+}
+
 .ri-w {
     display: inline-block;
     opacity: 0;
