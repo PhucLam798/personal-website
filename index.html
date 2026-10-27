@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#06080d" />
+    <meta name="description" content="Tạ Phúc Lâm — Portfolio 2026 · The Journey of a System Thinker (Embedded Systems, Edge AI, Robotics, AIoT)" />
+    <title>Tạ Phúc Lâm — The Journey of a System Thinker</title>
+
+    <!-- Google Fonts: Space Grotesk (Display), Newsreader (Editorial Serif Italic), Plus Jakarta Sans (Body), JetBrains Mono (Code/Telemetry) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Custom Zero-Overhead Editorial & Motion Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-dark" data-active-chapter="home">
+
+    <!-- ====================================================================
+         00. CINEMATIC SYSTEM PRELOADER / CALIBRATION SEQUENCE
+         ==================================================================== -->
+    <div id="system-preloader" aria-hidden="true">
+        <div class="preloader-inner">
+            <div class="preloader-top-meta">
+                <span class="font-code text-xs tracking-widest uppercase opacity-70" data-i18n="loader.status">TẠ PHÚC LÂM · PORTFOLIO 2026</span>
+                <span class="font-code text-xs tracking-widest">SYS.2026</span>
+            </div>
+            <div class="preloader-center">
+                <div class="preloader-counter-wrap">
+                    <span id="preloader-counter" class="preloader-counter">000</span>
+                    <span class="preloader-pct">%</span>
+                </div>
+                <div class="preloader-bar-track">
+                    <div id="preloader-bar-fill" class="preloader-bar-fill"></div>
+                </div>
+                <p class="font-code text-[11px] tracking-[0.22em] uppercase opacity-60 mt-4" data-i18n="loader.sub">
+                    HỆ THỐNG NHÚNG · EDGE AI · ROBOTICS · AIoT
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         CUSTOM PRECISION CURSOR
+         ==================================================================== -->
+    <div id="cursor-dot" aria-hidden="true"></div>
+    <div id="cursor-ring" aria-hidden="true">
+        <span id="cursor-label"></span>
+    </div>
+
+    <!-- ====================================================================
+         ARCHITECTURAL BACKGROUND GRID & ATMOSPHERIC DEPTH
+         ==================================================================== -->
+    <div class="architectural-backdrop" aria-hidden="true">
+        <div class="arch-grid-lines"></div>
+        <div class="arch-radial-glow glow-a"></div>
+        <div class="arch-radial-glow glow-b"></div>
+    </div>
+
+    <!-- The other side of the wormhole: 3D corridor behind the chapters (js/after-space.js) -->
+    <canvas id="after-space" aria-hidden="true"></canvas>
+    <!-- Big name of the chapter the camera is flying into -->
+    <div id="warp-title" class="eyebrow" aria-hidden="true">
+        <span class="eyebrow-line"></span>
+        <span class="warp-title__name"></span>
+    </div>
+
+    <!-- ====================================================================
+         FIXED EDITORIAL HEADER & NAVIGATION
+         ==================================================================== -->
+    <header class="site-header fixed top-0 left-0 w-full z-50">
+        <div class="scroll-progress-track" aria-hidden="true">
+            <div id="scroll-progress-bar" class="scroll-progress-fill"></div>
+        </div>
+
+        <div class="header-container max-w-[1440px] mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+            <a href="#home" class="brand flex items-center gap-3 group magnetic-el" aria-label="Trang chủ Tạ Phúc Lâm">
+                <span class="brand-mark">PL</span>
+                <span class="brand-name font-bold tracking-tight text-sm sm:text-base leading-none" data-i18n="brand.name">Tạ Phúc Lâm</span>
+            </a>
+
+            <div class="flex items-center gap-3 sm:gap-5">
+                <nav class="hidden xl:flex items-center gap-6" aria-label="Điều hướng chính">
+                    <a href="#home" class="nav-link is-active" data-i18n="nav.home">00. Giới thiệu</a>
+                    <a href="#publications" class="nav-link" data-i18n="nav.pubs">01. Nghiên cứu</a>
+                    <a href="#projects" class="nav-link" data-i18n="nav.projects">02. Dự án</a>
+                    <a href="#activities" class="nav-link" data-i18n="nav.activities">03. Cột mốc</a>
+                    <a href="#awards" class="nav-link" data-i18n="nav.awards">04. Thành tích</a>
+                    <a href="#contact" class="nav-link" data-i18n="nav.contact">05. Liên hệ</a>
+                </nav>
+
+                <!-- Language Switcher (EN | VI) -->
+                <div class="lang-switch-group" role="group" aria-label="Language Selector">
+                    <button id="langEn" type="button" class="lang-btn" data-lang="en">EN</button>
+                    <button id="langVi" type="button" class="lang-btn is-active" data-lang="vi">VI</button>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" type="button" class="theme-toggle-btn magnetic-el" aria-label="Toggle Theme" title="Chế độ Sáng / Tối">
+                    <svg id="themeMoon" class="w-4 h-4 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="themeSun" class="w-4 h-4 transition hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button id="menuToggle" type="button" class="xl:hidden menu-hamburger-btn" aria-label="Mở menu" aria-controls="mobileNav" aria-expanded="false">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+                        <line x1="3" y1="7" x2="21" y2="7"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="17" x2="21" y2="17"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileNav" class="xl:hidden mobile-nav-drawer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="flex flex-col items-start gap-3.5 px-6 py-6 font-code">
+                <a href="#home" class="nav-link text-sm" data-i18n="nav.home">00. Giới thiệu</a>
+                <a href="#publications" class="nav-link text-sm" data-i18n="nav.pubs">01. Nghiên cứu</a>
+                <a href="#projects" class="nav-link text-sm" data-i18n="nav.projects">02. Dự án</a>
+                <a href="#activities" class="nav-link text-sm" data-i18n="nav.activities">03. Cột mốc</a>
+                <a href="#awards" class="nav-link text-sm" data-i18n="nav.awards">04. Thành tích</a>
+                <a href="#contact" class="nav-link text-sm" data-i18n="nav.contact">05. Liên hệ</a>
+                <button id="mobileThemeToggle" type="button" class="mt-2 px-4 py-1.5 text-xs font-code border border-current/25 flex items-center gap-2">
+                    <span id="mobileThemeText">Theme: Dark 🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================
+         MASTER CONTINUOUS STORY CONTAINER
+         ==================================================================== -->
+    <main id="smooth-content" class="relative z-10 pt-20 overflow-x-clip">
+
+        <!-- ================================================================
+             00 — INTRODUCTION (#home): scroll-driven 3D road + pages (js/road-intro.js)
+             data-ri-from / data-ri-to = scroll progress (0..1) where each page enters / leaves.
+             ================================================================ -->
+        <section id="home" class="road-intro" aria-label="Giới thiệu">
+            <div id="about" class="road-intro__anchor" aria-hidden="true"></div>
+            <div class="road-intro__stage">
+                <canvas class="road-intro__canvas" aria-hidden="true"></canvas>
+                <div class="road-intro__scrim" aria-hidden="true"></div>
+
+                <div class="ri-block ri-center ri-b0" data-ri-from="-1" data-ri-to="0.044">
+                    <h1 class="ri-title ri-title--xl" data-ri-split data-i18n-html="intro.title">Mọi hệ thống lớn<br>đều bắt đầu từ một <em>tín hiệu nhỏ.</em></h1>
+                </div>
+
+                <div class="ri-block ri-side ri-b1" data-ri-from="0.07" data-ri-to="0.176">
+                    <p class="ri-kicker" data-ri-item data-i18n="intro.s1.kicker">HỒI QUY TUYẾN TÍNH</p>
+                    <h2 class="ri-title" data-ri-split data-i18n-html="intro.s1.title">Giữa những điểm nhiễu,<br>luôn có một <em>xu hướng.</em></h2>
+                    <p class="ri-desc" data-ri-item data-i18n="intro.s1.desc">Mỗi điểm là một lần thử: một dự án, một lỗi, một bài học. Khớp chúng lại bằng bình phương tối thiểu, đường đi hiện ra rõ ràng và tiếp tục hướng lên.</p>
+                </div>
+
+                <div class="ri-block ri-center ri-high ri-b2" data-ri-from="0.216" data-ri-to="0.282">
+                    <h2 class="ri-title" data-ri-split data-i18n-html="intro.s2.title">Mỗi bước đi,<br>con đường lại <em>mở ra phía trước.</em></h2>
+                </div>
+
+                <!-- PAGE · Systems thinking (left) + portrait and name (right) -->
+                <div class="ri-block ri-page" data-ri-from="0.29" data-ri-to="0.414">
+                    <div class="ri-page__split">
+                        <div class="ri-page__copy">
+                            <p class="ri-kicker" data-ri-item data-i18n="intro.about.kicker">Giới thiệu</p>
+                            <h2 class="ri-heading" data-ri-item data-i18n="about.title">Tư duy hệ thống</h2>
+                            <p class="ri-lead" data-ri-item data-i18n-html="about.lead">Không chỉ là những dòng code rời rạc. Không chỉ là mạch điện độc lập. Mọi bài toán thực tế đều cần một <span class="editorial-serif">kiến trúc liền mạch</span>.</p>
+                            <p class="ri-body" data-ri-item data-i18n="about.bio">Tôi quan tâm đến việc biến bài toán đời thực thành một hệ thống kỹ thuật hoàn chỉnh: từ cảm biến, mạch điện, phần cứng nhúng đến mô hình trí tuệ nhân tạo và thuật toán điều khiển thời gian thực.</p>
+                            <div class="ri-tags" data-ri-item>
+                                <span>AI on Edge</span><span>Embedded Systems</span><span>Robotics &amp; AIoT</span><span>Real-time Control</span>
+                            </div>
+                        </div>
+                        <figure class="ri-portrait">
+                            <div class="ri-portrait__frame" data-ri-item>
+                                <img src="images/bee.jpg" alt="Chân dung Tạ Phúc Lâm" class="previewable-img" data-cursor-label="INSPECT"
+                                     onerror="this.parentElement.classList.add('is-missing')" />
+                                <span class="ri-portrait__fallback" aria-hidden="true">PL</span>
+                            </div>
+                            <figcaption>
+                                <span class="ri-portrait__name" data-ri-item data-i18n="hero.name">TẠ PHÚC LÂM</span>
+                                <span class="ri-portrait__role" data-ri-item data-i18n="hero.title">Theo đuổi tư duy hệ thống</span>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- PAGE · Education & foundations -->
+                <div class="ri-block ri-page" data-ri-from="0.422" data-ri-to="0.528">
+                    <div class="ri-page__split ri-page__split--even">
+                        <div class="ri-page__copy">
+                            <p class="ri-kicker" data-ri-item data-i18n="about.edu.label">HÀNH TRÌNH HỌC TẬP</p>
+                            <h2 class="ri-heading" data-ri-item data-i18n="about.edu.title">Đào tạo &amp; Nền tảng</h2>
+                            <p class="ri-lead" data-ri-item data-i18n="hero.desc">Tôi theo đuổi lối tư duy tập trung vào giao thoa giữa phần cứng nhúng (Embedded), AI trên biên (Edge AI), Robotics và AIoT để tạo ra những giải pháp công nghệ hữu ích.</p>
+                            <div class="ri-tags" data-ri-item>
+                                <span>AIoT</span><span>Edge AI</span><span>Robotics</span><span>Embedded</span>
+                            </div>
+                        </div>
+                        <ol class="ri-timeline">
+                            <li class="ri-card" data-ri-item>
+                                <div class="ri-card__bar"><strong data-i18n="about.edu2.time">2023 — 2026</strong></div>
+                                <h3 class="ri-card__title" data-i18n="about.edu2.title">Trường THPT Chuyên Lê Quý Đôn, Quảng Trị</h3>
+                                <p class="ri-card__text" data-i18n-html="about.edu2.desc">Lớp Chuyên Vật lý<br>Chủ nhiệm CLB STEM</p>
+                            </li>
+                            <li class="ri-card is-current" data-ri-item>
+                                <div class="ri-card__bar"><strong data-i18n="about.edu1.time">2026 — Hiện tại</strong></div>
+                                <h3 class="ri-card__title" data-i18n="about.edu1.title">Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM</h3>
+                                <p class="ri-card__text" data-i18n-html="about.edu1.desc">Kỹ thuật Điện tử — Viễn thông<br><strong class="accent-highlight">Chuyên ngành: Máy tính và Hệ thống nhúng</strong></p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- PAGE · 5-stage system loop as a signal-flow line (nodes rendered from TPL.DATA.systemPipeline) -->
+                <div class="ri-block ri-page" data-ri-from="0.537" data-ri-to="0.642">
+                    <header class="ri-page__head">
+                        <h2 class="ri-heading ri-heading--flow" data-ri-item>SENSE → PROCESS → ACTUATE</h2>
+                    </header>
+                    <div class="ri-flow">
+                        <div class="ri-flow__track" aria-hidden="true">
+                            <span class="ri-flow__fill" data-ri-item="line"><span class="ri-flow__pulse"></span></span>
+                        </div>
+                        <ol class="ri-flow__nodes" data-ri-pipeline></ol>
+                    </div>
+                </div>
+
+                <!-- PAGE · 3 technical pillars -->
+                <div class="ri-block ri-page" data-ri-from="0.651" data-ri-to="0.748">
+                    <header class="ri-page__head">
+                        <h2 class="ri-heading" data-ri-item data-i18n="skills.title">Năng lực kỹ thuật</h2>
+                    </header>
+                    <div class="ri-pillars">
+                        <article class="ri-card" data-ri-item>
+                            <div class="ri-viz" data-skill-viz="algo" aria-hidden="true"></div>
+                            <div class="ri-card__bar"><span data-i18n="skills.g1.sub">Ngôn ngữ &amp; Công cụ</span></div>
+                            <h3 class="ri-card__title" data-i18n="skills.g1.title">Lập trình</h3>
+                            <p class="ri-card__text" data-i18n="skills.g1.desc">Nền tảng lập trình cấu trúc dữ liệu, giải thuật và phát triển phần mềm hiệu năng cao cho hệ thống nhúng.</p>
+                            <div class="ri-tags ri-tags--sm"><span>Python</span><span>C / C++</span><span>IDE</span><span>Git/GitHub</span></div>
+                        </article>
+                        <article class="ri-card" data-ri-item>
+                            <div class="ri-viz" data-skill-viz="mlp" aria-hidden="true"></div>
+                            <div class="ri-card__bar"><span data-i18n="skills.g2.sub">Mô hình &amp; Thuật toán</span></div>
+                            <h3 class="ri-card__title" data-i18n="skills.g2.title">AI &amp; Machine Learning</h3>
+                            <p class="ri-card__text" data-i18n="skills.g2.desc">Huấn luyện, tinh chỉnh và triển khai Machine Learning, Deep Learning, LLM và Computer Vision.</p>
+                            <div class="ri-tags ri-tags--sm"><span>ML</span><span>DL</span><span>LLM</span><span>CV</span><span>Optimize</span></div>
+                        </article>
+                        <article class="ri-card" data-ri-item>
+                            <div class="ri-viz" data-skill-viz="pid" aria-hidden="true"></div>
+                            <div class="ri-card__bar"><span data-i18n="skills.g3.sub">Vi mạch &amp; Điều khiển</span></div>
+                            <h3 class="ri-card__title" data-i18n="skills.g3.title">Hệ thống &amp; Phần cứng</h3>
+                            <p class="ri-card__text" data-i18n="skills.g3.desc">Thiết kế mạch điện tử, tích hợp vi điều khiển, giao tiếp cảm biến và thuật toán điều khiển động học phản hồi.</p>
+                            <div class="ri-tags ri-tags--sm"><span>Embedded Systems</span><span>PCB</span><span>PID Control</span></div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="ri-block ri-center ri-b5" data-ri-from="0.765" data-ri-to="0.87">
+                    <h2 class="ri-title ri-title--xl" data-ri-split data-i18n-html="intro.s5.title">Và đó là nơi<br>hành trình <em>bắt đầu.</em></h2>
+                    <div class="ri-actions" data-ri-item>
+                        <a href="#projects" class="btn-cinematic-primary magnetic-el" data-cursor-label="EXPLORE">
+                            <span data-i18n="hero.btnProjects">Khám phá dự án</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="#contact" class="btn-cinematic-outline magnetic-el" data-cursor-label="CONNECT">
+                            <span data-i18n="hero.btnContact">Liên hệ hợp tác</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ri-block ri-center ri-b6" data-ri-from="0.905" data-ri-to="0.99">
+                    <p class="ri-kicker" data-ri-item data-i18n="intro.s6.kicker">01 · NGHIÊN CỨU</p>
+                    <h2 class="ri-title ri-title--xl" data-ri-split data-i18n-html="intro.s6.title">Khi không gian <em>bẻ cong,</em><br>câu hỏi bắt đầu.</h2>
+                </div>
+
+                <div class="ri-block ri-scroll-hint" data-ri-from="-1" data-ri-to="0.035" aria-hidden="true">
+                    <span data-i18n="intro.scroll">CUỘN ĐỂ BẮT ĐẦU</span>
+                    <span class="ri-scroll-line"><span></span></span>
+                </div>
+
+                <a href="#publications" class="ri-skip" data-i18n="intro.skip">BỎ QUA ↓</a>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             01 — RESEARCH / PUBLICATIONS (#publications)
+             ================================================================ -->
+        <section id="publications" class="chapter-section chapter-03 relative px-5 sm:px-10 lg:px-16 py-24 lg:py-32 max-w-[1440px] mx-auto">
+
+
+            <!-- Section Header -->
+            <div class="grid lg:grid-cols-12 gap-8 items-end mb-14" data-reveal>
+                <div class="lg:col-span-8">
+                    <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="pub.eyebrow">01 · Nghiên cứu &amp; công bố</span></p>
+                    <h2 class="chapter-display-title mt-3" data-i18n="pub.title">Công Bố Khoa Học &amp; Tiến Độ Nghiên Cứu</h2>
+                </div>
+                <div class="lg:col-span-4">
+                    <p class="text-sm sm:text-base opacity-80 leading-relaxed" data-i18n="pub.subtitle">
+                        Khảo sát không gian biểu diễn tiềm ẩn của Mô hình Ngôn ngữ Lớn và hành trình chuyển dịch ngữ nghĩa của Prompt tiếng Việt.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Paper (row 1) + manuscripts in progress (row 2) -->
+            <div class="research-rows">
+
+                <!-- Primary Paper Dossier -->
+                <article data-reveal class="architectural-panel p-7 sm:p-10 flex flex-col justify-between relative">
+                    <span class="frame-corner corner-tl"></span>
+                    <span class="frame-corner corner-br"></span>
+
+                    <div>
+                        <div class="flex flex-wrap items-center gap-2.5 mb-6">
+                            <span class="pub-badge-arch is-rank">Q1</span>
+                            <span class="pub-badge-arch is-role" data-i18n="pub.p1.role">Vai trò: Tác giả chính (First Author)</span>
+                            <span class="pub-badge-arch is-review">
+                                <span class="review-pulse-dot"></span>
+                                <span data-i18n="pub.p1.status">Trạng thái: Đang bình duyệt</span>
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-3xl font-bold font-display leading-snug mb-4">
+                            Do LLMs Think in English When Prompted in Vietnamese? A Pre-Registered Study of Latent-Language Measurement
+                        </h3>
+
+                        <div class="font-code text-xs sm:text-sm accent-text mb-6" data-i18n="pub.p1.venue">Tạp chí quốc tế Neural Networks (Q1)</div>
+                    </div>
+
+                    <div class="pt-5 border-t border-current/15 text-sm sm:text-base">
+                        <span class="opacity-65 mr-2 font-code text-xs uppercase" data-i18n="pub.authorsLabel">Tác giả:</span>
+                        <strong class="accent-highlight font-bold">Lam Phuc Ta</strong>, Hoai Trong Le
+                        <span data-i18n="pub.and">và</span> Luan Thanh Nguyen
+                    </div>
+                </article>
+
+                <!-- Manuscripts in progress -->
+                <article data-reveal class="research-wip architectural-panel p-7 sm:p-10">
+                    <div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="pub-badge-arch is-wip" data-i18n="pub.wip.status">Trạng thái: Đang thực hiện · Đang hoàn thành</span>
+                        </div>
+                        <h3 class="text-2xl font-bold font-display mb-2" data-i18n="pub.wip.title">Tạp chí, hội nghị ...</h3>
+                        <div class="font-code text-xs accent-text mb-4" data-i18n="pub.wip.progress">Bản thảo đang hoàn thiện.</div>
+                        <p class="text-sm sm:text-base opacity-80 leading-relaxed mb-6" data-i18n="pub.wip.desc">
+                            Nghiên cứu đang trong giai đoạn thực nghiệm và hoàn thiện bản thảo để gửi tới các tạp chí, hội nghị tiếp theo...
+                        </p>
+                    </div>
+
+                    <div class="research-wip__slots">
+                        <div class="wip-slot-box">
+                            <span class="wip-dot dot-cyan"></span>
+                            <span class="font-code text-xs" data-i18n="pub.wip.jour">Tạp chí: Đang chuẩn bị...</span>
+                        </div>
+                        <div class="wip-slot-box">
+                            <span class="wip-dot dot-orange"></span>
+                            <span class="font-code text-xs" data-i18n="pub.wip.conf">Hội nghị: Đang chuẩn bị...</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Fly-through gap: the camera passes a gate here (js/after-space.js) -->
+        <div class="warp-gap" aria-hidden="true"></div>
+
+        <!-- ================================================================
+             02 — PROJECTS (#projects)
+             ================================================================ -->
+        <section id="projects" class="chapter-section chapter-04 relative px-5 sm:px-10 lg:px-16 py-24 lg:py-32 max-w-[1440px] mx-auto">
+            <!-- Chapter Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12" data-reveal>
+                <div>
+                    <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="projects.eyebrow">02 · Dự án</span></p>
+                    <h2 class="chapter-display-title mt-3" data-i18n="projects.title">Một số dự án nổi bật</h2>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                    <a class="github-profile-pill magnetic-el"
+                       href="https://github.com/PhucLam798"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       data-cursor-label="GITHUB ↗">
+                        <span>GitHub @PhucLam798</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 6 project cards (rendered by js/chapters.js from TPL.DATA.projects) -->
+            <div id="projectGrid" class="project-grid"></div>
+        </section>
+
+        <!-- Fly-through gap: the camera passes a gate here (js/after-space.js) -->
+        <div class="warp-gap" aria-hidden="true"></div>
+
+        <!-- ================================================================
+             03 — EXPERIENCE / MILESTONES (#activities)
+             ================================================================ -->
+        <section id="activities" class="chapter-section chapter-02 relative">
+            <div class="py-20 lg:py-28 px-5 sm:px-10 lg:px-16 max-w-[1440px] mx-auto">
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12" data-reveal>
+                    <div>
+                        <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="act.eyebrow">03 · Cột mốc</span></p>
+                        <h2 class="chapter-display-title mt-2" data-i18n="act.title">Cột mốc theo thời gian</h2>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <p class="text-sm opacity-75 max-w-sm" data-i18n="act.subtitle">
+                            Trải nghiệm học tập, vận hành hệ thống thực tế và định hướng nghiên cứu khoa học.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Spatial Milestone Track (3 Architectural Stations) -->
+                <div class="milestones-track">
+
+                    <!-- STATION 01: INFINITE STUDIO -->
+                    <article data-reveal class="milestone-station architectural-panel p-7 sm:p-9 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-current/15 pb-4 mb-6">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-code text-xs font-bold accent-text" data-i18n="act.infinite.time">2026 — Hiện tại</span>
+                                </div>
+                                <span class="status-pill is-verified" data-i18n="act.infinite.status">Đang làm việc</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-bold font-display mt-1" data-i18n="act.infinite.title">INFINITE Studio</h3>
+                            <p class="text-sm accent-text mt-1 mb-4" data-i18n-html="act.infinite.role">
+                                <strong>Software Engineer Intern</strong> &middot; Web Systems &amp; Workflow Automation
+                            </p>
+                            <p class="text-sm sm:text-base leading-relaxed opacity-85 mb-6" data-i18n="act.infinite.desc">
+                                Đảm nhận vai trò thiết kế và phát triển hệ thống phần mềm vận hành nội bộ end-to-end cho studio. Tạo ra nền tảng Web và công cụ tự động hóa quy trình nghiệp vụ (nhận hàng, xử lý dữ liệu, luân chuyển đơn) giúp tối ưu hóa hoạt động thương mại.
+                            </p>
+                        </div>
+
+                        <!-- Studio Spotlight with if.jpg -->
+                        <div class="station-spotlight p-5 border border-current/20">
+                            <div class="grid sm:grid-cols-12 gap-4 items-center">
+                                <div class="sm:col-span-5">
+                                    <div class="spotlight-img-frame">
+                                        <img src="images/if.jpg"
+                                             alt="Infinite Builds - INFINITE Studio"
+                                             class="w-full h-28 object-contain previewable-img"
+                                             data-cursor-label="INSPECT"
+                                             onerror="this.parentElement.classList.add('img-fallback-active')" />
+                                        <span class="img-fallback-text hidden font-code text-xs accent-text">INFINITE BUILDS</span>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-7 space-y-1.5">
+                                    <h4 class="text-sm sm:text-base font-bold font-display" data-i18n="act.infinite.spotlightTitle">Xây dựng Hệ thống Vận hành Thương mại</h4>
+                                    <p class="text-xs sm:text-sm opacity-80 leading-relaxed" data-i18n="act.infinite.spotlightDesc">
+                                        Tự tay xây dựng và triển khai toàn bộ các giải pháp phần mềm, tự động hóa chuỗi quy trình nghiệp vụ, giúp hệ thống kinh doanh và phân phối sản phẩm của studio hoạt động tự động và hiệu quả.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- STATION 02: SEAS 2026 (40 / 400) -->
+                    <article data-reveal class="milestone-station architectural-panel p-7 sm:p-9 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-current/15 pb-4 mb-6">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-code text-xs font-bold accent-text">07/2026 — 08/2026</span>
+                                </div>
+                                <span class="status-pill is-verified" data-i18n="act.seas.status">Đã hoàn thành</span>
+                            </div>
+
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div>
+                                    <h3 class="text-2xl sm:text-3xl font-bold font-display mt-1" data-i18n="act.seas.title">Summer in Engineering and Applied Sciences (SEAS)</h3>
+                                    <p class="text-sm accent-text mt-1" data-i18n-html="act.seas.role">
+                                        <strong>Thành viên</strong> (được chọn <strong>40 trên 400 ứng viên</strong> trên toàn quốc)
+                                    </p>
+                                </div>
+                                <div class="seas-logo-frame flex-shrink-0" title="SEAS - Summer in Engineering and Applied Sciences">
+                                    <img src="images/seas.jpg"
+                                         alt="SEAS Logo"
+                                         class="w-16 h-16 object-contain previewable-img"
+                                         data-cursor-label="INSPECT"
+                                         onerror="this.parentElement.classList.add('img-fallback-active')" />
+                                    <span class="img-fallback-text hidden font-code text-xs accent-text">SEAS</span>
+                                </div>
+                            </div>
+
+                            <!-- Key project: name on the left, role in the right corner -->
+                            <div class="station-spotlight seas-project p-4 border border-current/20 mb-4">
+                                <a class="seas-project__name"
+                                   href="https://seas-cvn.com/home"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   data-cursor-label="OPEN ↗">
+                                    <span data-i18n="act.seas.spotlightTitle">Phân loại bệnh lá trên cây lúa dành cho nông dân</span>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                                </a>
+                                <span class="seas-project__role" data-i18n="act.seas.lead">Trưởng nhóm dự án</span>
+                            </div>
+                        </div>
+
+                        <!-- Program notes callout -->
+                        <div class="station-spotlight p-5 border border-current/20">
+                            <span class="note-kicker" data-i18n="act.seas.noteKicker">Ghi chú chương trình:</span>
+                            <ul class="space-y-2 text-xs sm:text-sm opacity-85 pl-4 list-disc marker:text-cyan-400">
+                                <li data-i18n-html="act.seas.b1">
+                                    Hoàn thành chương trình học chuyên sâu, toàn thời gian trong hai tuần về <strong>Trí tuệ nhân tạo và Ứng dụng</strong> (được xây dựng dựa trên chương trình đại học ngành Khoa học Máy tính của đại học MIT).
+                                </li>
+                                <li data-i18n-html="act.seas.b2">
+                                    Làm việc trực tiếp với các cử nhân và nghiên cứu sinh tiến sĩ đến từ <strong>Harvard, MIT, MBZUAI, CERN, NUS, Stony Brook, Ericsson Research, VinAI</strong> và nhiều đại học, tổ chức hàng đầu khác.
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- STATION 03: FPT ELITE SCHOLARSHIP & VNU-HCM DIRECTION -->
+                    <article data-reveal class="milestone-station architectural-panel p-7 sm:p-9 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-current/15 pb-4 mb-6">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-code text-xs font-bold accent-text" data-i18n="act.schol.time">07/07/2026</span>
+                                </div>
+                                <span class="status-pill is-scholarship" data-i18n="act.schol.badge">Học bổng</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-bold font-display mt-1" data-i18n="act.schol.title">Học bổng Tinh hoa Công nghệ</h3>
+                            <p class="text-sm accent-text mt-1 mb-4" data-i18n-html="act.schol.role">
+                                Đại học FPT &middot; Tài trợ 100% học phí &amp; sinh hoạt phí
+                            </p>
+                            <p class="text-sm sm:text-base leading-relaxed opacity-85 mb-6" data-i18n="act.schol.content">
+                                Tài trợ 100% học phí toàn khóa, kèm sinh hoạt phí và cơ hội nghiên cứu cùng chuyên gia dành cho cá nhân có năng lực công nghệ và thành tích xuất sắc.
+                            </p>
+                        </div>
+
+                        <!-- Direction Decision Callout -->
+                        <div class="direction-decision-box p-5 border-l-2 border-cyan-400">
+                            <div class="text-xs sm:text-sm leading-relaxed" data-i18n-html="act.schol.note">
+                                <strong class="note-kicker">Ghi chú định hướng:</strong> Tuy nhiên tôi lựa chọn theo học tại <strong>Đại học Khoa học Tự nhiên (ĐHQG-HCM)</strong> — nơi giàu bề dày học thuật và truyền thống đào tạo khoa học kỹ thuật mũi nhọn, phù hợp nhất với định hướng nghiên cứu chuyên sâu của bản thân.
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Fly-through gap: the camera passes a gate here (js/after-space.js) -->
+        <div class="warp-gap" aria-hidden="true"></div>
+
+        <!-- ================================================================
+             04 — ACHIEVEMENTS (#awards), laid out as two rows
+             ================================================================ -->
+        <section id="awards" class="chapter-section chapter-05 relative px-5 sm:px-10 lg:px-16 py-24 lg:py-32 max-w-[1440px] mx-auto">
+
+
+            <div class="grid lg:grid-cols-12 gap-8 items-end mb-14" data-reveal>
+                <div class="lg:col-span-7">
+                    <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="awards.eyebrow">04 · Thành tích</span></p>
+                    <h2 class="chapter-display-title mt-3" data-i18n="awards.title">Những cột mốc đáng nhớ</h2>
+                </div>
+                <div class="lg:col-span-5">
+                    <p class="text-sm sm:text-base opacity-80 leading-relaxed" data-i18n="awards.subtitle">
+                        Năm dấu mốc khẳng định nỗ lực bền bỉ qua các kỳ thi nghiên cứu KHKT quốc gia, lập trình thuật toán và Olympic Vật lý.
+                    </p>
+                </div>
+            </div>
+
+            <div id="awardsList" class="awards-grid"></div>
+        </section>
+
+        <!-- Fly-through gap: the camera passes a gate here (js/after-space.js) -->
+        <div class="warp-gap" aria-hidden="true"></div>
+
+        <!-- ================================================================
+             05 — CONTACT (#contact)
+             ================================================================ -->
+        <section id="contact" class="chapter-section chapter-06 relative px-5 sm:px-10 lg:px-16 py-24 lg:py-36 max-w-[1440px] mx-auto">
+
+            <!-- Closing statement -->
+            <div class="flex flex-col items-center text-center mb-14 relative" data-reveal>
+                <p class="eyebrow justify-center"><span class="eyebrow-line"></span><span data-i18n="contact.eyebrow">05 · Kết nối</span></p>
+
+                <!-- Iconic Monumental Closing Statement -->
+                <h2 class="contact-monumental-statement mt-4" data-i18n-html="contact.statement">
+                    LET'S BUILD <span class="editorial-serif">Something</span> MEANINGFUL.
+                </h2>
+
+                <p class="text-xl sm:text-2xl font-display font-semibold mt-4" data-i18n-html="contact.title">
+                    Cùng xây những <em class="accent-highlight not-italic">điều có ích.</em>
+                </p>
+
+                <p class="text-base sm:text-lg opacity-80 max-w-xl mt-3" data-i18n="contact.desc">
+                    Nếu bạn có ý tưởng về hardware, AI hoặc robotics, tôi luôn sẵn lòng trao đổi.
+                </p>
+            </div>
+
+            <!-- 3 Interactive Connection Conduits -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+                <!-- Conduit 01: Email -->
+                <div data-reveal class="conduit-card architectural-panel p-7 flex flex-col justify-between">
+                    <div>
+                        <a href="mailto:taphuclamab@gmail.com" class="block group" data-cursor-label="EMAIL ↗">
+                            <span class="text-xs font-code uppercase tracking-widest accent-text block mb-1">Email</span>
+                            <strong class="text-lg sm:text-xl font-display font-bold break-all group-hover:text-cyan-400 transition">
+                                taphuclamab@gmail.com
+                            </strong>
+                        </a>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-current/15 flex items-center justify-between">
+                        <a href="mailto:taphuclamab@gmail.com" class="font-code text-xs uppercase tracking-wider hover:text-cyan-400 transition">
+                            mailto: ↗
+                        </a>
+                        <button id="copyEmailBtn" type="button" class="copy-email-pill magnetic-el" data-cursor-label="COPY">
+                            <span data-i18n="contact.copyEmail">Sao chép Email</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Conduit 02: GitHub -->
+                <a href="https://github.com/PhucLam798"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-reveal class="conduit-card architectural-panel p-7 flex flex-col justify-between group magnetic-el"
+                   data-cursor-label="GITHUB ↗">
+                    <div>
+                        <span class="text-xs font-code uppercase tracking-widest accent-text block mb-1">GitHub</span>
+                        <strong class="text-2xl font-display font-bold group-hover:text-cyan-400 transition">
+                            @PhucLam798
+                        </strong>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-current/15 flex items-center justify-between font-code text-xs">
+                        <span>github.com/PhucLam798</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    </div>
+                </a>
+
+                <!-- Conduit 03: Facebook -->
+                <a href="https://www.facebook.com/phuc.lam.993406"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-reveal class="conduit-card architectural-panel p-7 flex flex-col justify-between group magnetic-el"
+                   data-cursor-label="SOCIAL ↗">
+                    <div>
+                        <span class="text-xs font-code uppercase tracking-widest accent-text block mb-1">Facebook</span>
+                        <strong class="text-2xl font-display font-bold group-hover:text-cyan-400 transition" data-i18n="contact.facebookName">
+                            Phúc Lâm
+                        </strong>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-current/15 flex items-center justify-between font-code text-xs">
+                        <span>facebook.com/phuc.lam.993406</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ================================================================
+             ARCHITECTURAL COLOPHON / FOOTER
+             ================================================================ -->
+        <footer class="site-footer border-t border-current/15 py-10 px-5 sm:px-10 lg:px-16 max-w-[1440px] mx-auto relative z-10">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-code opacity-75">
+                <div class="flex items-center gap-2">
+                    <span>&copy; <span id="year">2026</span> <strong>TẠ PHÚC LÂM</strong></span>
+                    <span>&middot;</span>
+                    <span class="accent-text" data-i18n="footer.tagline">Tư duy hệ thống</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <span data-i18n="footer.desc">Thiết kế với sự chỉn chu &amp; tinh thần khám phá.</span>
+                    <a href="#home" class="accent-text hover:underline" data-i18n="footer.backTop">VỀ ĐIỂM KHỞI ĐẦU ↑</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ================================================================
+             PROJECT README VIEWER (#readmeModal), filled by js/chapters.js
+             ================================================================ -->
+        <div id="readmeModal" class="readme-modal" aria-hidden="true">
+            <div class="readme-modal__layout">
+                <div class="readme-modal__panel" role="dialog" aria-modal="true" aria-labelledby="readmeTitle">
+                    <header class="readme-modal__head">
+                        <div>
+                            <span class="readme-modal__file">README.md</span>
+                            <h3 id="readmeTitle" class="readme-modal__title"></h3>
+                        </div>
+                        <button type="button" class="readme-modal__close" aria-label="Đóng">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
+                    </header>
+                    <div class="readme-modal__body"></div>
+                </div>
+
+                <!-- Small card beside the README: project summary + GitHub link -->
+                <aside class="readme-side">
+                    <div class="readme-side__top">
+                        <span class="readme-side__num"></span>
+                        <span class="readme-side__type"></span>
+                    </div>
+                    <h4 class="readme-side__title"></h4>
+                    <p class="readme-side__desc"></p>
+                    <div class="readme-side__tags"></div>
+                    <a class="readme-side__git" href="#" target="_blank" rel="noopener noreferrer" data-cursor-label="GITHUB ↗">
+                        <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span>GitHub</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    </a>
+                </aside>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             IMAGE PREVIEW LIGHTBOX MODAL (#imageModal)
+             ================================================================ -->
+        <div id="imageModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" aria-hidden="true">
+            <div class="relative max-w-3xl w-full flex flex-col items-center">
+                <button id="closeImageModal" type="button" class="absolute -top-12 right-0 text-gray-300 hover:text-white p-2 border border-white/20 bg-black/80 transition" aria-label="Đóng xem ảnh">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+                <div class="relative max-h-[85vh] max-w-full overflow-hidden border border-cyan-400/50 bg-black p-2 flex items-center justify-center">
+                    <img id="modalImg" src="" alt="Xem ảnh phóng to" class="max-h-[80vh] max-w-full object-contain"/>
+                </div>
+                <p id="modalCaption" class="mt-3 text-xs font-code text-cyan-300 uppercase tracking-widest text-center"></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ====================================================================
+         MODULAR APPLICATION ARCHITECTURE
+         ==================================================================== -->
+    <script src="js/data.js"></script>
+    <script src="js/chapters.js"></script>
+    <script src="js/road-intro.js"></script>
+    <script src="js/skill-viz.js"></script>
+    <script src="js/after-space.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
