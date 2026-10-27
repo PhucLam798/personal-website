@@ -412,7 +412,7 @@ window.TPL.DATA = {
         },
         'pub.p1.role': { en: 'Role: First Author', vi: 'Vai trò: Tác giả chính (First Author)' },
         'pub.p1.status': { en: 'Status: Under Review', vi: 'Trạng thái: Đang bình duyệt' },
-        'pub.p1.venue': { en: 'International Journal Neural Networks', vi: 'Tạp chí quốc tế Neural Networks (Q1)' },
+        'pub.p1.venue': { en: '...', vi: '...' },
         'pub.authorsLabel': { en: 'Authors:', vi: 'Tác giả:' },
         'pub.and': { en: 'and', vi: 'và' },
         'pub.wip.status': { en: 'Status: In Progress · Finalizing', vi: 'Trạng thái: Đang thực hiện · Đang hoàn thành' },
